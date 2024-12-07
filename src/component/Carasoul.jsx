@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const ImageSlider = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,11 +16,25 @@ const ImageSlider = ({ images }) => {
         setCurrentIndex(index);
     };
 
+    useEffect(() => {
+        const autoScroll = setInterval(() => {
+            handleNext();
+        }, 5000); // Auto-scroll every 5 seconds
+
+        return () => clearInterval(autoScroll);
+    }, [currentIndex]); // Resets interval on index change
+
     return (
-        <div className="relative w-full  mx-auto overflow-hidden">
+        <div
+            className="relative w-full mx-auto overflow-hidden"
+            onMouseEnter={() => clearInterval()}
+            onMouseLeave={() => setCurrentIndex((prev) => prev)} // Resumes auto-scroll
+        >
             {/* Images */}
-            <div className="flex transition-transform duration-500"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+            <div
+                className="flex transition-transform duration-500"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
                 {images.map((image, index) => (
                     <img
                         key={index}
@@ -35,7 +50,7 @@ const ImageSlider = ({ images }) => {
                 onClick={handlePrev}
                 className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-2"
             >
-                &#8249;
+                <FaChevronLeft />
             </button>
 
             {/* Right Button */}
@@ -43,7 +58,7 @@ const ImageSlider = ({ images }) => {
                 onClick={handleNext}
                 className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-2"
             >
-                &#8250;
+                <FaChevronRight />
             </button>
 
             {/* Dots for smaller screens */}
@@ -62,5 +77,3 @@ const ImageSlider = ({ images }) => {
 };
 
 export default ImageSlider;
-
-

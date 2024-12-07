@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Cards = ({ items,heading }) => {
+const Cards = ({ items, heading }) => {
     return (
         <div className="container mx-auto px-4">
             {/* Heading */}
             <div className="flex items-center my-8">
                 <hr className="flex-grow border-t border-gray-300" />
-                <h1 className="px-4 text-2xl font-bold text-center text-gray-800">{heading}</h1>
+                <h1 className="px-4 tracking-widest text-2xl font-semibold font-cormorant text-center text-gray-800">{heading}</h1>
                 <hr className="flex-grow border-t border-gray-300" />
             </div>
 
@@ -18,13 +18,13 @@ const Cards = ({ items,heading }) => {
                         className="max-w-full mx-auto"
                     >
                         <img
-                            className="w-full h-screen object-cover"
+                            className="w-[449px] h-[674px] object-cover"
                             src={item.image}
                             alt={item.name}
                         />
-                        <div className="p-4">
-                            <h5 className="mb-2 text-[14px] font-bold text-[#313131]">{item.name}</h5>
-                            <p className="font-medium text-gray-700">${item.price}</p>
+                        <div className="p-4 flex flex-col justify-center items-center">
+                            <h5 className="mb-2 text-sm leading-6 font-bold text-gray-900">{item.name}</h5>
+                            <p className="font-medium text-gray-700">₹{item.price}</p>
                         </div>
                     </div>
                 ))}
