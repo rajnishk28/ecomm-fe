@@ -23,7 +23,7 @@ const Cards = ({ items,heading }) => {
                             alt={item.name}
                         />
                         <div className="p-4">
-                            <h5 className="mb-2 text-lg font-bold text-gray-900">{item.name}</h5>
+                            <h5 className="mb-2 text-[14px] font-bold text-[#313131]">{item.name}</h5>
                             <p className="font-medium text-gray-700">${item.price}</p>
                         </div>
                     </div>

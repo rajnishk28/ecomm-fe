@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-6 py-9 bg-white shadow-md">
+      <nav className="flex items-center justify-between px-6 py-9 bg-white shadow- font-sans text-xs font-bold">
         <div className="flex items-center space-x-4">
           <button className="text-gray-600 hover:text-gray-800">Login</button>
           <button className="text-gray-600 hover:text-gray-800">
@@ -25,10 +25,13 @@ const Navbar = () => {
           </button>
         </div>
         <div className="hidden lg:flex items-center space-x-8">
-          <a href="#shop" className="hover:text-gray-500">Shop</a>
-          <a href="#collections" className="hover:text-gray-500">Collections</a>
-          <a href="#about" className="hover:text-gray-500">About</a>
-          <a href="#contact" className="hover:text-gray-500">Contact</a>
+          <a href="#shop" className="hover:text-gray-500 text-[#000000] ">SHOP</a>
+          <a href="#collections" className="hover:text-gray-500">COLLECTIONS</a>
+          <a href="/" className="hover:text-gray-500">
+            <img src="https://labelanushree.com/wp-content/uploads/2021/03/la_wordmark-dark_menu.jpg" alt="" />
+          </a>
+          <a href="#about" className="hover:text-gray-500">ABOUT</a>
+          <a href="#contact" className="hover:text-gray-500">CONTACT</a>
         </div>
         <div className="flex items-center space-x-4">
         <button className="text-gray-600 hover:text-gray-800">
