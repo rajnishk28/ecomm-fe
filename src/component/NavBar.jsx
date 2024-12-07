@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import { FiSearch, FiShoppingCart } from "react-icons/fi"; // Import icons
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Login from "./Auth/Login";
+import CartModal from "./CartModal"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [loginModal, setLoginModal] = useState(false);
+  const [cartModalOpen, setCartModalOpen] = useState(false);
 
   const openLoginModal = () => {
     setLoginModal(true);
-  }
+  };
+
+  const openCartModal = () => {
+    setCartModalOpen(true); // Open the cart modal
+  };
+
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -40,8 +48,13 @@ const Navbar = () => {
           <a href="#contact" className="hover:text-gray-500">CONTACT</a>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="text-gray-600 hover:text-gray-800">
-            <FiShoppingCart size={20} />
+          <button
+            onClick={openCartModal}
+            className="relative text-gray-600 hover:text-gray-800">
+            <FiShoppingCart size={30} />
+            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
+              2
+            </span>
           </button>
           <button
             className="lg:hidden text-xl"
@@ -130,12 +143,11 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-    
-        {
-          loginModal && <Login closeModal={setLoginModal} />
-        }
-        
-    
+
+      {/* Render Modals */}
+      {loginModal && <Login closeModal={setLoginModal} />}
+      <div> {cartModalOpen && <CartModal closeCartModal={setCartModalOpen} />}</div>
+
     </div>
   );
 };
