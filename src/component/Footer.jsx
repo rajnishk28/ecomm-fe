@@ -66,8 +66,8 @@ const Footer = () => {
                     <div>
                         <h3 class="uppercase font-semibold mb-4">Customer Care</h3>
                         <ul class="space-y-2">
-                            <li><a href="tel:+919619852390" class="hover:text-gray-400">+91-9619852390</a></li>
-                            <li><a href="mailto:care@labelanushree.com" class="hover:text-gray-400">care@labelanushree.com</a></li>
+                            <li><a href="tel:+91789654123" class="hover:text-gray-400">+91-987654123</a></li>
+                            <li><a href="mailto:care@test.com" class="hover:text-gray-400">care@test.com</a></li>
                             <li>
                                 801, Vastu Precinct, Lokhandwala Complex Road,<br />
                                 Andheri West, Mumbai – 400053, India.
