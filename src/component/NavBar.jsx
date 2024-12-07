@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
+      <nav className="flex items-center justify-between px-6 py-9 bg-white shadow-md">
         <div className="flex items-center space-x-4">
           <button className="text-gray-600 hover:text-gray-800">Login</button>
           <button className="text-gray-600 hover:text-gray-800">
