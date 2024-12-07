@@ -50,7 +50,7 @@ const CartModal = ({ closeCartModal }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end transition-opacity duration-300 ease-in-out">
-            <div className="cart-modal bg-white w-[30%] h-full p-8 fixed top-0 right-0 shadow-lg overflow-y-auto">
+            <div className="cart-modal bg-white w-96 h-full p-8 fixed top-0 right-0 shadow-lg overflow-y-auto">
                 {/* Close Button */}
                 <button
                     onClick={closeCart}
