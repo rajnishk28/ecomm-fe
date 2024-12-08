@@ -1,7 +1,9 @@
 import React from "react";
 import Navbar from "../component/NavBar";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+    const navigate = useNavigate();
     const cartItems = [
         {
             id: 1,
@@ -71,7 +73,9 @@ const Cart = () => {
                         <p className="text-lg font-medium">
                             Subtotal: Rs. {cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toLocaleString("en-IN")}.00
                         </p>
-                        <button className="px-6 py-3 bg-red-500 text-white rounded-md shadow hover:bg-red-600">
+                        <button
+                            onClick={() => navigate("/checkout")}
+                            className="px-6 py-3 bg-red-500 text-white rounded-md shadow hover:bg-red-600">
                             CHECKOUT
                         </button>
                     </div>
