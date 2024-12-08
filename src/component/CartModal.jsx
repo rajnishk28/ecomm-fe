@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const cartItems = [
     {
@@ -36,6 +37,7 @@ const cartItems = [
 
 
 const CartModal = ({ closeCartModal }) => {
+    const navigate = useNavigate();
     const closeCart = () => {
         closeCartModal(false); // Close the cart modal
     };
@@ -113,7 +115,7 @@ const CartModal = ({ closeCartModal }) => {
                 <div className="mt-8 flex space-x-4">
                     <button
                         className="w-1/2 bg-gray-700 text-white py-2 rounded hover:bg-gray-900"
-                        onClick={() => alert("View Cart clicked")}
+                        onClick={() => navigate("/cart")}
                     >
                         View Cart
                     </button>

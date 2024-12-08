@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Cards = ({ items, heading }) => {
     return (
         <div className="container mx-auto px-4">
@@ -15,6 +16,7 @@ const Cards = ({ items, heading }) => {
                 {items.map((item, index) => (
                     <div key={index} className="max-w-full mx-auto">
                         <img
+
                             className="w-full h-96 object-cover flex-shrink-0"
                             src={item.image}
                             alt={item.name}
@@ -25,6 +27,7 @@ const Cards = ({ items, heading }) => {
                         </div>
 
                     </div>
+
                 ))}
             </div>
 

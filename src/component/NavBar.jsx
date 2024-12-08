@@ -39,7 +39,7 @@ const Navbar = () => {
           </button>
         </div>
         <div className="hidden lg:flex items-center space-x-8">
-          <a href="#shop" className="hover:text-gray-500 text-[#000000] ">SHOP</a>
+          <a href="/shop" className="hover:text-gray-500 text-[#000000] ">SHOP</a>
           <a href="#collections" className="hover:text-gray-500">COLLECTIONS</a>
           <a href="/" className="hover:text-gray-500">
             <img src="https://labelanushree.com/wp-content/uploads/2021/03/la_wordmark-dark_menu.jpg" alt="" />
