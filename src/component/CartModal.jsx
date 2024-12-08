@@ -121,7 +121,7 @@ const CartModal = ({ closeCartModal }) => {
                     </button>
                     <button
                         className="w-1/2 bg-black text-white py-2 rounded hover:bg-gray-800"
-                        onClick={() => alert("Checkout clicked")}
+                        onClick={() => navigate("/checkout")}
                     >
                         Checkout
                     </button>
