@@ -42,6 +42,7 @@ const ProductPage = () => {
             alt={productData.title}
             className="w-full h-auto rounded-lg mb-4"
           />
+          <div className="overflow-x-auto">
           <div className="flex gap-2">
             {productData.images.map((image, index) => (
               <img
@@ -53,6 +54,7 @@ const ProductPage = () => {
                 onClick={() => setSelectedImage(image)}
               />
             ))}
+          </div>
           </div>
         </div>
 
