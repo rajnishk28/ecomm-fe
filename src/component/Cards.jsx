@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Cards = ({ items, heading }) => {
     return (
@@ -12,7 +13,7 @@ const Cards = ({ items, heading }) => {
 
             {/* Cards Container */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {items.map((item, index) => (
+                {items.map((item, index) => (<><Link to={`/product/${item.name}`}>
                     <div
                         key={index}
                         className="max-w-full mx-auto"
@@ -27,6 +28,8 @@ const Cards = ({ items, heading }) => {
                             <p className="font-medium text-gray-700">₹{item.price}</p>
                         </div>
                     </div>
+                </Link>
+                </>
                 ))}
             </div>
         </div>
