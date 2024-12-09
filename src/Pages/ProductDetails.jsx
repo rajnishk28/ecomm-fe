@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import Navbar from '../component/NavBar';
-
+import React, { useState } from "react";
+import Navbar from "../component/NavBar";
 
 const productData = {
   title: "Starlit Mini Dress",
@@ -18,17 +17,34 @@ const productData = {
     "https://labelanushree.com/wp-content/uploads/2022/04/slider-NIR_la-1536x838.png",
     "https://labelanushree.com/wp-content/uploads/2023/04/nirvvi-1024x559.jpeg",
     "https://labelanushree.com/wp-content/uploads/2024/09/slider-STA_la.png",
-    "https://labelanushree.com/wp-content/uploads/2022/04/slider-NIR_la-1536x838.png"
-  ]
+    "https://labelanushree.com/wp-content/uploads/2022/04/slider-NIR_la-1536x838.png",
+  ],
 };
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(productData.images[0]);
+  const [selectedSize, setSelectedSize] = useState(productData.sizes[0]); // Default to the first size
 
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const handleAddToCart = () => {
+    const productDetails = {
+      title: productData.title,
+      price: productData.price,
+      quantity,
+      selectedSize,
+      color: productData.color.name,
+      brand: productData.brand,
+      image: selectedImage,
+    };
+
+    // Log the details
+    console.log("Product Details:", productDetails);
+
   };
 
   return (
@@ -43,18 +59,20 @@ const ProductPage = () => {
             className="w-full h-auto rounded-lg mb-4"
           />
           <div className="overflow-x-auto">
-          <div className="flex gap-2">
-            {productData.images.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Thumbnail ${index}`}
-                className={`w-20 h-20 object-cover cursor-pointer rounded-lg border ${selectedImage === image ? "border-blue-500" : "border-gray-300"
-                  }`}
-                onClick={() => setSelectedImage(image)}
-              />
-            ))}
-          </div>
+            <div className="flex gap-2">
+              {productData.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Thumbnail ${index}`}
+                  className={`w-20 h-20 object-cover cursor-pointer rounded-lg border ${selectedImage === image
+                      ? "border-blue-500"
+                      : "border-gray-300"
+                    }`}
+                  onClick={() => setSelectedImage(image)}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -70,7 +88,9 @@ const ProductPage = () => {
               {productData.sizes.map((size) => (
                 <button
                   key={size}
-                  className="border px-4 py-2 rounded-lg hover:bg-gray-100"
+                  className={`border px-4 py-2 rounded-lg hover:bg-gray-100 ${selectedSize === size ? "bg-gray-200" : ""
+                    }`}
+                  onClick={() => setSelectedSize(size)}
                 >
                   {size}
                 </button>
@@ -113,13 +133,12 @@ const ProductPage = () => {
             </button>
           </div>
 
-          <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 w-full mb-4">
+          <button
+            onClick={handleAddToCart}
+            className="bg-[#a20204] text-white px-6 py-3 rounded-lg hover:bg-[#000000] w-full mb-4"
+          >
             Add to Cart
           </button>
-
-          {/* <button className="border px-6 py-3 rounded-lg hover:bg-gray-100 w-full">
-            Buy with ShopPay
-          </button> */}
         </div>
       </div>
     </>

@@ -7,7 +7,6 @@ export const getProfile = async (token) => {
     headers: {
       Authorization: `${token}`
     },
-    // withCredentials: true,
   });
 
   return response.data;
