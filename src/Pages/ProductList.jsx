@@ -36,10 +36,10 @@ const ProductList = () => {
                             <img
                                 src={item.image}
                                 alt={item.title}
-                                className="w-full h-80 object-cover"
+                                className="w-full h-96 object-cover"
                             />
-                            <div className="p-4">
-                                <h2 className="text-sm font-bold text-gray-800">
+                            <div className="p-4 tracking-widest font-semibold font-cormorant ">
+                                <h2 className="text-md font-bold text-gray-800">
                                     {item.title}
                                 </h2>
                                 <p className="text-gray-600">{item.price}</p>
