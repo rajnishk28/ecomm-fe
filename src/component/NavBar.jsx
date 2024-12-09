@@ -86,7 +86,7 @@ const Navbar = () => {
                 {dropdownOpen === "shop" && (
                   <ul className="pl-4 space-y-2 mt-2">
                     <li>
-                      <a href="#cape" className="block hover:text-gray-500">
+                      <a href="/shop" className="block hover:text-gray-500">
                         Cape Coolest Set
                       </a>
                     </li>
