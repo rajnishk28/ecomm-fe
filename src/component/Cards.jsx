@@ -13,7 +13,7 @@ const Cards = ({ items, heading }) => {
 
             {/* Cards Container */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {items.map((item, index) => (<><Link to={`/product/${item.name}`}>
+                {items.map((item, index) => (<><Link to={`/shop`}>
                     <div
                         key={index}
                         className="max-w-full mx-auto"
