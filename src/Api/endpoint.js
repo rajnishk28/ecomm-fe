@@ -2,7 +2,8 @@
 export const ENDPOINTS = {
   LOGIN: ``,
   SIGNUP: ``,
-  VIEWPRODUCT: ``,
+  VIEWALLPRODUCT: `/product/getall`,
+  VIEWPRODUCTID:`/product/getone`,
   ADDTOCART: ``,
   VIEWCART: ``,
   DELETECART: ``,

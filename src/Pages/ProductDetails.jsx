@@ -1,30 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../component/NavBar";
-
-const productData = {
-  title: "Starlit Mini Dress",
-  price: "15,900.00",
-  discount: "Get 10% Off on First Purchase",
-  sizes: ["XS", "S", "M", "L", "XL"],
-  color: { name: "Midnight Ombre", hex: "#3C3B6E" },
-  material: "Viscose",
-  brand: "callingjune",
-  description:
-    "Starlit Mini Dress features a tiered skirt adds a playful and dynamic element to your every step, while subtle gold lurex threads add a touch of glamour to the overall allure. The little ruffle detail on the neck adds a hint of romance, enhancing the overall elegance of the piece. Embrace the magic of ombre, the allure of gold, and the grace of ruffles in this captivating dress.",
-  images: [
-    "https://labelanushree.com/wp-content/uploads/2023/04/nirvvi-1024x559.jpeg",
-    "https://labelanushree.com/wp-content/uploads/2024/09/slider-STA_la.png",
-    "https://labelanushree.com/wp-content/uploads/2022/04/slider-NIR_la-1536x838.png",
-    "https://labelanushree.com/wp-content/uploads/2023/04/nirvvi-1024x559.jpeg",
-    "https://labelanushree.com/wp-content/uploads/2024/09/slider-STA_la.png",
-    "https://labelanushree.com/wp-content/uploads/2022/04/slider-NIR_la-1536x838.png",
-  ],
-};
+import { getProductById } from "../Api/services/ProductsService";
+import { useParams } from 'react-router-dom';
+import Loader from "../component/common/Loader";
 
 const ProductPage = () => {
+  const { id } = useParams();
+  const [productData, setProductData] = useState(null); // Change to null for better initial state handling
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(productData.images[0]);
-  const [selectedSize, setSelectedSize] = useState(productData.sizes[0]); // Default to the first size
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const fetchProduct = async () => {
+    try {
+      const res = await getProductById(id);
+      // console.log(res.product);
+      setProductData(res.product);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchProduct(); // Fetch product data only if an ID exists
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (productData) {
+      // Once product data is available, set default selected image and size
+      setSelectedImage(productData.images[0]);
+      setSelectedSize(productData.sizes[0]);
+    }
+  }, [productData]);
 
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => {
@@ -32,7 +41,8 @@ const ProductPage = () => {
   };
 
   const handleAddToCart = () => {
-    const productDetails = {
+    console.log("Product Details:");
+    console.log({
       title: productData.title,
       price: productData.price,
       quantity,
@@ -40,12 +50,13 @@ const ProductPage = () => {
       color: productData.color.name,
       brand: productData.brand,
       image: selectedImage,
-    };
-
-    // Log the details
-    console.log("Product Details:", productDetails);
-
+    });
   };
+
+  // Loading state or error handling could be added for better UX
+  if (!productData) {
+    return <div className="flex justify-center items-center"><Loader/></div>; // Or any loading spinner UI
+  }
 
   return (
     <>
@@ -66,8 +77,8 @@ const ProductPage = () => {
                   src={image}
                   alt={`Thumbnail ${index}`}
                   className={`w-20 h-20 object-cover cursor-pointer rounded-lg border ${selectedImage === image
-                      ? "border-blue-500"
-                      : "border-gray-300"
+                    ? "border-blue-500"
+                    : "border-gray-300"
                     }`}
                   onClick={() => setSelectedImage(image)}
                 />
