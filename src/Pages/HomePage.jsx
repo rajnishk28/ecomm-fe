@@ -4,6 +4,7 @@ import ImageSlider from '../component/Carasoul'
 import Cards from '../component/Cards'
 import Cards2 from "../component/Card2"
 import Card3 from '../component/Card3'
+import Footer from '../component/Footer'
 const HomePage = () => {
     const images = [
         "https://labelanushree.com/wp-content/uploads/2023/04/nirvvi-1024x559.jpeg",
@@ -33,7 +34,7 @@ const HomePage = () => {
             <Cards items={trendingItems} heading={"TRENDING NOW"} />
             <Cards2 items={trendingItems1} heading={"CELEBRITY CLOSET"} />
             <Card3 />
-            
+            <Footer />
         </>
     )
 }

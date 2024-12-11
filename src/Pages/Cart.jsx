@@ -1,32 +1,13 @@
 import React from "react";
 import Navbar from "../component/NavBar";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Footer from "../component/Footer";
 
 const Cart = () => {
     const navigate = useNavigate();
-    const cartItems = [
-        {
-            id: 1,
-            name: "Belize Mini Dress",
-            size: "XS",
-            color: "Black Garden",
-            material: "Cotton",
-            price: 11900,
-            quantity: 1,
-            image: "https://labelanushree.com/wp-content/uploads/2023/04/nirvvi-1024x559.jpeg",
+    const cartItems = useSelector((state) => state.cart.value)
 
-        },
-        {
-            id: 2,
-            name: "Elizabeth Mini Dress",
-            size: "XS",
-            color: "White",
-            material: "Cotton",
-            price: 11900,
-            quantity: 1,
-            image: "https://labelanushree.com/wp-content/uploads/2024/09/slider-STA_la.png",
-        },
-    ];
 
     return (
         <>
@@ -84,6 +65,7 @@ const Cart = () => {
                     </p>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 };

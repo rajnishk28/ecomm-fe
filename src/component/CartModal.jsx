@@ -1,52 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const cartItems = [
-    {
-        id: 1,
-        name: "Bandhani & Silk Lehenga",
-        price: 21000,
-        quantity: 3,
-        image: "https://labelanushree.com/wp-content/uploads/2024/09/LASTA35-01-400x600.jpg",
-        removeFromCart: (id) => {/* handle item removal */ }
-    },
-    {
-        id: 2,
-        name: "Red Marodi Work Gown",
-        price: 34000,
-        quantity: 1,
-        image: "https://labelanushree.com/wp-content/uploads/2024/05/LAKAI32-01-400x600.jpg",
-        removeFromCart: (id) => {/* handle item removal */ }
-    }, {
-        id: 1,
-        name: "Bandhani & Silk Lehenga",
-        price: 21000,
-        quantity: 3,
-        image: "https://labelanushree.com/wp-content/uploads/2024/09/LASTA35-01-400x600.jpg",
-        removeFromCart: (id) => {/* handle item removal */ }
-    },
-    {
-        id: 2,
-        name: "Red Marodi Work Gown",
-        price: 34000,
-        quantity: 1,
-        image: "https://labelanushree.com/wp-content/uploads/2024/05/LAKAI32-01-400x600.jpg",
-        removeFromCart: (id) => {/* handle item removal */ }
-    }
-];
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../slices/cart.slice"
 
 
 const CartModal = ({ closeCartModal }) => {
     const navigate = useNavigate();
-    const closeCart = () => {
-        closeCartModal(false); // Close the cart modal
-    };
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state) => state.cart.value);
+    // console.log("cartitem from redux",cartItems)
+
     React.useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
             document.body.style.overflow = "auto";
         };
     }, []);
+
+    const closeCart = () => {
+        closeCartModal(false);
+    };
+
     // Calculate total amount
     const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -95,7 +69,7 @@ const CartModal = ({ closeCartModal }) => {
                             {/* Remove Button */}
                             <button
                                 className="text-gray-500 hover:text-red-500"
-                                onClick={() => item.removeFromCart(item.id)}
+                                onClick={() => dispatch(removeFromCart({ id: item.id }))}
                             >
                                 &times;
                             </button>

@@ -3,7 +3,7 @@ import Navbar from "../component/NavBar"
 import { Link } from 'react-router-dom';
 import { getAllProduct } from "../Api/services/ProductsService"
 import Loader from "../component/common/Loader"
-
+import Footer from '../component/Footer';
 
 const ProductList = () => {
     const [product, setProduct] = useState([]);
@@ -53,7 +53,7 @@ const ProductList = () => {
             </div>
 
         }
-
+        <Footer />
     </>
     )
 }

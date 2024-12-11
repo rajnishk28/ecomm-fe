@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../component/NavBar";
 import OrderSummary from "./OrderSummary";
+import Footer from "../component/Footer";
 
 const CheckOut = () => {
     const [formData, setFormData] = useState({
@@ -148,6 +149,7 @@ const CheckOut = () => {
                 
             </form>
             <OrderSummary/>
+            <Footer/>
         </>
     );
 };

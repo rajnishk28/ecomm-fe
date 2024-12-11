@@ -3,9 +3,13 @@ import Navbar from "../component/NavBar";
 import { getProductById } from "../Api/services/ProductsService";
 import { useParams } from 'react-router-dom';
 import Loader from "../component/common/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../slices/cart.slice"
+import Footer from "../component/Footer";
 
 const ProductPage = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const [productData, setProductData] = useState(null); // Change to null for better initial state handling
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -41,21 +45,22 @@ const ProductPage = () => {
   };
 
   const handleAddToCart = () => {
-    console.log("Product Details:");
-    console.log({
-      title: productData.title,
-      price: productData.price,
-      quantity,
-      selectedSize,
-      color: productData.color.name,
-      brand: productData.brand,
-      image: selectedImage,
-    });
+    if (productData) {
+      const cartItem = {
+        id: productData.id,
+        title: productData.title,
+        price: productData.price,
+        image: selectedImage,
+        size: selectedSize,
+        quantity,
+      };
+      dispatch(addToCart(cartItem)); // Dispatch the product details to the Redux store
+    }
   };
 
   // Loading state or error handling could be added for better UX
   if (!productData) {
-    return <div className="flex justify-center items-center"><Loader/></div>; // Or any loading spinner UI
+    return <div className="flex justify-center items-center"><Loader /></div>; // Or any loading spinner UI
   }
 
   return (
@@ -152,6 +157,7 @@ const ProductPage = () => {
           </button>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

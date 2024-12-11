@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FiSearch, FiShoppingCart } from "react-icons/fi"; // Import icons
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Login from "./Auth/Login";
 import CartModal from "./CartModal"
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [cartModalOpen, setCartModalOpen] = useState(false);
 
+  const cartCount=useSelector((state)=>state.cart.cartItemCount)
   const openLoginModal = () => {
     setLoginModal(true);
   };
@@ -53,7 +54,7 @@ const Navbar = () => {
             className="relative text-gray-600 hover:text-gray-800">
             <FiShoppingCart size={30} />
             <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
-              2
+              {cartCount}
             </span>
           </button>
           <button
