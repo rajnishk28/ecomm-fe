@@ -44,18 +44,9 @@ const ProductPage = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
 
-  const handleAddToCart = () => {
-    if (productData) {
-      const cartItem = {
-        id: productData.id,
-        title: productData.title,
-        price: productData.price,
-        image: selectedImage,
-        size: selectedSize,
-        quantity,
-      };
-      dispatch(addToCart(cartItem)); // Dispatch the product details to the Redux store
-    }
+  const handleAddToCart = (data) => {
+    console.log(data)
+      dispatch(addToCart(data)); // Dispatch the product details to the Redux store 
   };
 
   // Loading state or error handling could be added for better UX
@@ -150,7 +141,7 @@ const ProductPage = () => {
           </div>
 
           <button
-            onClick={handleAddToCart}
+            onClick={()=>handleAddToCart(productData)}
             className="bg-[#a20204] text-white px-6 py-3 rounded-lg hover:bg-[#000000] w-full mb-4"
           >
             Add to Cart

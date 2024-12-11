@@ -1,14 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../slices/cart.slice"
-
+import { removeFromCart } from "../slices/cart.slice";
 
 const CartModal = ({ closeCartModal }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.value);
-    // console.log("cartitem from redux",cartItems)
 
     React.useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -21,7 +19,11 @@ const CartModal = ({ closeCartModal }) => {
         closeCartModal(false);
     };
 
-    // Calculate total amount
+    const removeCart = (_id) => {
+        console.log("Removing item with _id:", _id);
+        dispatch(removeFromCart({ _id })); // Pass the _id as part of the payload
+    };
+
     const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
@@ -43,38 +45,39 @@ const CartModal = ({ closeCartModal }) => {
 
                 {/* Cart Items */}
                 <div className="mt-8 space-y-6">
-                    {cartItems.map((item, index) => (
-                        <div
-                            key={index}
-                            className="flex items-center border-b pb-4"
-                        >
-                            {/* Product Image */}
-                            <img
-                                src={item.image}
-                                alt={item.name}
-                                className="w-16 h-16 object-cover rounded mr-4"
-                            />
-                            {/* Product Details */}
-                            <div className="flex-grow">
-                                <h3 className="text-sm font-bold">
-                                    {item.name}
-                                </h3>
-                                <p className="text-sm text-gray-600">
-                                    Qty: {item.quantity}
-                                </p>
-                                <p className="text-sm text-gray-800 font-semibold">
-                                    ₹{item.price.toLocaleString()}
-                                </p>
-                            </div>
-                            {/* Remove Button */}
-                            <button
-                                className="text-gray-500 hover:text-red-500"
-                                onClick={() => dispatch(removeFromCart({ id: item.id }))}
+                    {cartItems.length === 0 ? (
+                        <p className="text-center text-gray-500">Your cart is empty.</p>
+                    ) : (
+                        cartItems.map((item) => (
+                            <div
+                                key={item._id}
+                                className="flex items-center border-b pb-4"
                             >
-                                &times;
-                            </button>
-                        </div>
-                    ))}
+                                {/* Product Image */}
+                                <img
+                                    src={item.images[0]}
+                                    alt={item.title}
+                                    className="w-16 h-16 object-cover rounded mr-4"
+                                />
+                                {/* Product Details */}
+                                <div className="flex-grow">
+                                    <h3 className="text-sm font-bold">{item.title}</h3>
+                                    <p className="text-sm text-gray-600">Brand: {item.brand}</p>
+                                    <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+                                    <p className="text-sm text-gray-800 font-semibold">
+                                        ₹{(item.price * item.quantity).toLocaleString()}
+                                    </p>
+                                </div>
+                                {/* Remove Button */}
+                                <button
+                                    className="text-gray-500 hover:text-red-500"
+                                    onClick={() => removeCart(item._id)}
+                                >
+                                    &times;
+                                </button>
+                            </div>
+                        ))
+                    )}
                 </div>
 
                 {/* Cart Total */}
