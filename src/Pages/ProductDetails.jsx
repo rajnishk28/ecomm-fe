@@ -124,7 +124,7 @@ const ProductPage = () => {
           <p className="text-gray-700 mb-4">By {productData.brand}</p>
           <p className="text-gray-600 mb-4">{productData.description}</p>
 
-          <div className="flex items-center gap-4 mb-4">
+          {/* <div className="flex items-center gap-4 mb-4">
             <button
               onClick={decreaseQuantity}
               className="px-4 py-2 border rounded-lg hover:bg-gray-100"
@@ -138,7 +138,7 @@ const ProductPage = () => {
             >
               +
             </button>
-          </div>
+          </div> */}
 
           <button
             onClick={()=>handleAddToCart(productData)}

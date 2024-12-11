@@ -1,13 +1,19 @@
 import React from "react";
 import Navbar from "../component/NavBar";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import Footer from "../component/Footer";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../slices/cart.slice";
 
 const Cart = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.value)
-
+console.log("cartItems from redux ",cartItems)
+const removeCart = (_id) => {
+    console.log("Removing item with _id:", _id);
+    dispatch(removeFromCart({ _id })); // Pass the _id as part of the payload
+};
 
     return (
         <>
@@ -15,25 +21,27 @@ const Cart = () => {
             <div className="max-w-4xl mx-auto p-6">
                 <h1 className="text-3xl font-bold mb-6 text-center">Your cart</h1>
                 <div className="border-t border-gray-200">
-                    {cartItems.map((item) => (
-                        <div key={item.id} className="flex py-6 border-b border-gray-200">
+                    {cartItems?.map((item) => (
+                        <div key={item._id} className="flex py-6 border-b border-gray-200">
                             <img
-                                src={item.image}
-                                alt={item.name}
+                                src={item?.images[0]}
+                                alt={item.brand}
                                 className="w-24 h-32 object-cover"
                             />
                             <div className="ml-4 flex-1">
-                                <h2 className="text-lg font-medium">{item.name}</h2>
-                                <p className="text-sm text-gray-600">Size: {item.size}</p>
-                                <p className="text-sm text-gray-600">Color: {item.color}</p>
-                                <p className="text-sm text-gray-600">Material: {item.material}</p>
-                                <button className="mt-2 text-sm text-red-500">Remove</button>
+                                <h2 className="text-lg font-medium">{item?.title}</h2>
+                                <p className="text-sm text-gray-600">Size: {item?.sizes[0]}</p>
+                                <p className="text-sm text-gray-600">Color: {item?.color.name}</p>
+                                <p className="text-sm text-gray-600">Material: {item?.material}</p>
+                                <button 
+                                 onClick={() => removeCart(item._id)}
+                                className="mt-2 text-sm text-red-500">Remove</button>
                             </div>
                             <div className="flex flex-col items-end">
-                                <p className="text-lg font-medium">Rs. {item.price.toLocaleString("en-IN")}.00</p>
+                                <p className="text-lg font-medium">Rs. {item?.price.toLocaleString("en-IN")}.00</p>
                                 <div className="flex items-center mt-2">
                                     <button className="px-2 py-1 text-gray-600 bg-gray-200">-</button>
-                                    <span className="px-3">{item.quantity}</span>
+                                    <span className="px-3">{item?.quantity}</span>
                                     <button className="px-2 py-1 text-gray-600 bg-gray-200">+</button>
                                 </div>
                             </div>
